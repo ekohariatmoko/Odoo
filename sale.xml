@@ -1,0 +1,102 @@
+<openerp>
+<data>
+
+<record id="act_kode_barang" model="ir.ui.view">
+    <field name="name">sale.order</field>
+    <field name="model">sale.order</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        
+        <field name="client_order_ref" position="before">
+            <field name="x_tgl_order" string="Tgl.Kwitansi"/>
+            <field name="x_sj"/>
+            <field name="x_angg" string="Anggaran"/>
+            <field name="sum_total_percent" invisible="1"/>
+            <field name="sum_total" invisible="1"/>
+        </field>
+        <field name="partner_id" position="after">
+            <field name="x_nasabah"/>
+            <field name="x_alamat"/>
+            <field name="user_id" string="Pelaksana"/>
+            <field name="x_bank" string="Transfer/Bank"/>
+        </field> 
+
+        <!-- Menambahkan kolom many2many -->
+        <field name="note" position="after">
+            <field name="terbilang"/>
+            <!-- <field name="po_ids"/> -->
+            <group string="HPP">
+            </group>
+            <field name="move_ids"/>
+            <field name="sum_po_voucher" string="Hpp"/>
+            <group string="Proses Pekerjaan">
+            </group>
+            <field name="proj_ids"/>
+        </field>
+        
+    </field>
+</record>
+
+<record id="act_kode_tree" model="ir.ui.view">
+    <field name="name">sale.order</field>
+    <field name="model">sale.order</field>
+    <field name="type">tree</field>
+    <field name="inherit_id" ref="sale.view_order_tree"/>
+    <field name="arch" type="xml">
+        <tree position="replace">
+            <tree string="Sales Orders" fonts="bold:message_unread==True" colors="grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except')">
+                <field name="message_unread" invisible="1"/>
+                <field name="client_order_ref"/>
+                <field name="name" string="Order Number"/>
+                <field name="date_order" invisible="1"/>
+                <field name="x_tgl_order"/>
+                <field name="partner_id"/>
+                <field name="x_nasabah"/>
+                <field name="user_id"/>
+                <field name="x_angg"/>
+                <field name="amount_total" sum="Total Tax Included"/>
+                <field name="sum_po_voucher" sum="Amount Total"/>
+                <field name="sum_total" sum="Amount Total"/>
+                <field name="sum_total_percent"/>
+                <field name="state"/>
+            </tree>
+        </tree>
+        
+    </field>
+</record>
+
+<record id="act_kode_tree_quo" model="ir.ui.view">
+    <field name="name">sale.order</field>
+    <field name="model">sale.order</field>
+    <field name="type">tree</field>
+    <field name="inherit_id" ref="sale.view_quotation_tree"/>
+    <field name="arch" type="xml">
+        <tree position="replace">
+            <tree string="Quotation" fonts="bold:message_unread==True" colors="grey:state=='cancel';blue:state in ('waiting_date','manual');red:state in ('invoice_except','shipping_except'); red:sum_total &gt; amount_total;">
+                    <field name="message_unread" invisible="1"/>
+                    <field name="client_order_ref"/>
+                    <field name="name" string="Quotation Number"/>
+                    <field name="date_order" invisible="1"/>
+                    <field name="x_tgl_order"/>
+                    <field name="partner_id"/>
+                    <field name="x_nasabah"/>
+                    <field name="user_id"/>
+                    <field name="x_angg"/>
+                    <field name="amount_total" sum="Total Tax Included"/>
+                    <!-- tambahan field -->
+                    <field name="sum_po_voucher" sum="Amount Total"/>
+                    <field name="sum_total" sum="Amount Total"/>
+                    <field name="sum_total_percent"/>
+
+                    <field name="state"/>
+                </tree>
+        </tree>
+
+        
+    </field>
+</record>
+
+
+</data>
+</openerp>

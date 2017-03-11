@@ -1,0 +1,30 @@
+<openerp>
+<data>
+
+<record id="act_kode_stock" model="ir.ui.view">
+	<field name="name">stock.picking</field>
+	<field name="model">stock.picking</field>
+	<field name="type">form</field>
+	<field name="inherit_id" ref="stock.view_picking_form"/>
+	<field name="arch" type="xml">
+		<field name="partner_id" position="after">
+			<field name="kode_barang"/>
+			<field name="kode_barang2"/>
+		</field>
+	</field>
+</record>
+
+<record id="act_stock_tree" model="ir.ui.view">
+	<field name="name">stock.picking</field>
+	<field name="model">stock.picking</field>
+	<field name="type">tree</field>
+	<field name="inherit_id" ref="stock.vpicktree"/>
+	<field name="arch" type="xml">
+		<field name="partner_id" position="after">
+			<field name="kode_barang"/>
+		</field>
+	</field>
+</record>
+
+</data>
+</openerp>
